@@ -11,19 +11,19 @@ html {
 }
 
 body {
-  body {
-    margin: 0;
-    font-family: "Inter", "Work Sans", sans-serif;
-    background: radial-gradient(
-      circle at top,
-      #fff1f5,
-      #fbe7ee,
-      #f6dfe7
-    );
-    color: #2b2b2b;
-    overflow: hidden;
-  }
-  
+  margin: 0;
+  font-family: "Inter", "Work Sans", sans-serif;
+
+  background: radial-gradient(
+  circle at top,
+  #ffd1e3 0%,
+  #ffb6cf 35%,
+  #ff9fbe 70%,
+  #ff8fb4 100%
+);
+
+  color: #2b2b2b;
+  overflow: hidden;
 }
 
 /* ===============================
