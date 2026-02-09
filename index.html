@@ -11,9 +11,25 @@
   <!-- Styles -->
   <link rel="stylesheet" href="style/style.css" />
   <link rel="shortcut icon" type="image/png" href="./img/heart.svg" />
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
     rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    @keyframes fall {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(80px);
+        opacity: 1;
+      }
+    }
+    .falling-word {
+      display: inline-block;
+      animation: fall 10s ease-in infinite;
+    }
+  </style>
 </head>
 
 <body>
@@ -26,37 +42,33 @@
     <!-- Scene 1 -->
     <div class="one">
       <h1 class="one">
-        Hey <span id="name">xyz</span>
+        Hey <span id="name">xyz</span> 💫
       </h1>
       <p class="two" id="greetingText">
-        There’s something I wanted to tell you.
+        My heart has been waiting for the right moment to tell you something.
       </p>
     </div>
 
     <!-- Scene 2 -->
     <div class="three">
-      <p>This felt like the right moment.</p>
+      <p>✨ And I think... this is it. ✨</p>
     </div>
 
     <!-- Scene 3 -->
     <div class="four">
-      <div class="text-box">
-        <p class="hbd-chatbox">
-          I could’ve just typed a message… but that didn’t feel right.
-        </p>
-      </div>
+      <p style="font-size: 2.2rem; color: #2b2b2b; margin: 20px 0; font-weight: 500; line-height: 1.6;">I could've sent a <span style="color: #ff6b9d; font-style: italic;">simple text</span> 💬 but you deserve <span style="color: #ff4d6d; font-weight: 700;">so much more</span> 💝</p>
     </div>
 
     <!-- Scene 4 -->
     <div class="five">
-      <p class="idea-1">I started writing.</p>
-      <p class="idea-2">Then paused.</p>
+      <p class="idea-1">Every moment with you feels <span style="color: #ff4d6d; font-weight: 700;">special</span> ✨</p>
+      <p class="idea-2">The way you smile, the way you care... 💕</p>
       <p class="idea-3">
-        Because effort matters more than the word.
+        You've painted my world in <span style="background: linear-gradient(90deg, #ff4d6d, #ff85c0, #ff6b9d, #ff4d6d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;">colors</span> I never knew existed.
       </p>
-      <p class="idea-4">And honestly </p>
+      <p class="idea-4">And I realized... </p>
       <p class="idea-5">
-        You stand out
+        I'm <span class="falling-word">falling</span> for you
       </p>
       <p class="idea-6">
         <span>S</span>
@@ -68,8 +80,8 @@
     <div class="six">
       <img src="img/girl_pic.jpeg" class="girl-dp" id="imagePath" alt="A moment worth remembering" />
       <div class="wish">
-        <h3 class="wish-hbd">This one’s for you</h3>
-        <h5 id="wishText">Just thought you should know.</h5>
+        <h3 class=\"wish-hbd\" style=\"font-family: 'Fredoka', sans-serif; font-size: 3.5rem; font-weight: 700; margin: 20px 0; letter-spacing: 1px;\">You mean <span style=\"background: linear-gradient(135deg, #ff4d6d, #ff85c0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;\">everything</span> to me 💝</h3>
+        <h5 id="wishText" style="font-family: 'Fredoka', sans-serif; font-size: 1.2rem; font-weight: 500; letter-spacing: 0.5px; color: #2b2b2b;">And I hope you feel it in every heart that falls for you. ✨</h5>
       </div>
     </div>
 
@@ -130,7 +142,7 @@
     <!-- Scene 8 -->
     <div class="val-box-wrapper">
       <div class="valentine-box">
-        <h2 class="valentine-question">Will you be my Valentine? 💖</h2>
+        <h2 class="valentine-question">Will you be my Valentine? 💕</h2>
 
         <div class="buttons">
           <button id="yesBtn" class="common-btn">Yes</button>

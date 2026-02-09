@@ -68,6 +68,23 @@
   }
 }
 
+@keyframes floatUpFromCursor {
+  0% {
+    transform: rotate(45deg) translateY(0) translateX(0);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: rotate(90deg) translateY(-50px) translateX(20px);
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: rotate(45deg) translateY(-150px) translateX(-20px);
+    opacity: 0;
+  }
+}
+
 
 /* ===============================
    Valentine Background Layer
@@ -104,7 +121,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Inter", "Work Sans", sans-serif;
+  font-family: "Fredoka", "Poppins", sans-serif;
 
   /* Live Moving Gradient - Love Theme */
   background: linear-gradient(-45deg, #ff0844, #ffb199, #ff9a9e, #fad0c4, #fad0c4);
@@ -169,19 +186,38 @@ body {
 =============================== */
 
 .one {
+  font-family: "Fredoka", sans-serif;
   font-size: 4.2rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.5px;
 }
 
 .two {
+  font-family: "Fredoka", sans-serif;
   font-size: 1.2rem;
   font-weight: 300;
   opacity: 0.8;
 }
 
 .three {
+  font-family: "Fredoka", sans-serif;
   font-size: 2.8rem;
+  font-weight: 500;
+}
+
+/* Customize.json Elements */
+#name {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 700;
+}
+
+#greetingText {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 400;
+}
+
+#wishText {
+  font-family: "Fredoka", sans-serif;
   font-weight: 500;
 }
 
@@ -229,7 +265,9 @@ body {
 =============================== */
 
 .five p {
+  font-family: "Fredoka", sans-serif;
   font-size: 2rem;
+  font-weight: 600;
   position: absolute;
   left: 0;
   right: 0;
