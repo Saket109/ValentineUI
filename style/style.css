@@ -68,6 +68,23 @@
   }
 }
 
+@keyframes floatUpFromCursor {
+  0% {
+    transform: rotate(45deg) translateY(0) translateX(0);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: rotate(90deg) translateY(-50px) translateX(20px);
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: rotate(45deg) translateY(-150px) translateX(-20px);
+    opacity: 0;
+  }
+}
+
 
 /* ===============================
    Valentine Background Layer

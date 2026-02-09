@@ -74,7 +74,7 @@ const animationTimeline = () => {
       scale: 0.2,
       opacity: 0,
       y: -140,
-    }, "+=0.7")
+    }, "+=3.0")
 
     // Thought sequence
     .from(".idea-1", 0.7, ideaEnter)
@@ -646,3 +646,37 @@ const resolveFetch = () => {
 
 resolveFetch().then(animationTimeline());
 */
+
+// ===============================
+// Cursor Heart Spawning
+// ===============================
+const spawnHeartAtCursor = (e) => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  
+  // Position heart at exact cursor location
+  heart.style.left = e.clientX + "px";
+  heart.style.top = e.clientY + "px";
+  heart.style.bottom = "auto";
+  
+  // Use cursor-specific animation
+  heart.style.animationName = "floatUpFromCursor";
+  
+  // Random animation duration between 2-3 seconds for variety
+  const duration = (Math.random() * 1 + 2).toFixed(2);
+  heart.style.animationDuration = duration + "s";
+  
+  // Random color variation for hearts
+  const colors = ["#ff4d6d", "#ff6b9d", "#ff85c0", "#ffa3d2", "#ffc1e3"];
+  heart.style.background = colors[Math.floor(Math.random() * colors.length)];
+  
+  document.body.appendChild(heart);
+  
+  // Remove heart element after animation completes
+  setTimeout(() => {
+    heart.remove();
+  }, duration * 1000);
+};
+
+// Track cursor movement and spawn hearts
+document.addEventListener("mousemove", spawnHeartAtCursor);
