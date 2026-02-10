@@ -205,29 +205,84 @@ const animationTimeline = () => {
 // ===============================
 // Data Injection
 // ===============================
-const fetchData = () => {
-  return fetch("customize.json")
-    .then(res => res.json())
-    .then(data => {
-      Object.keys(data).forEach(key => {
-        if (!data[key]) return;
+// ===============================
+// Data Injection
+// ===============================
+const fetchData = async () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const valentineCode = urlParams.get("valentineCode");
+  const valentinePassword = localStorage.getItem("valentinePassword");
 
-        const el = document.getElementById(key);
-        if (!el) return;
+  console.log("FetchData config:", { valentineCode, hasPassword: !!valentinePassword });
 
-        if (key === "imagePath") {
-          el.setAttribute("src", data[key]);
-        } else {
-          el.innerText = data[key];
-        }
-      });
+  // DEBUG ALERT - Remove after fixing
+  // alert(`Debug: Code=${valentineCode}, Pass=${!!valentinePassword}`);
+
+  if (!valentineCode || !valentinePassword) {
+    console.warn("No valentineCode or password found. Skipping API fetch.");
+    return;
+  }
+
+  try {
+    const res = await fetch("https://api.cohrenzai.com/ValidateValentineNumber", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ valentineCode, valentinePassword }),
     });
+
+    if (!res.ok) throw new Error("API response not ok: " + res.status);
+
+    const data = await res.json();
+    console.log("API Response Data:", data);
+
+    // Handle direct or nested data structure
+    const content = data.data || data.user || data;
+    console.log("Resolved Content Object:", content);
+
+    // Map API fields to DOM
+    // sender -> #name
+    if (content.receiver) {
+      const nameEl = document.getElementById("name");
+      console.log("Updating Name Element:", nameEl, "with", content.receiver);
+      if (nameEl) nameEl.innerText = content.receiver;
+    } else {
+      console.warn("No receiver field in content");
+    }
+
+    // paragraph -> #wishText
+    if (content.paragraph) {
+      const wishEl = document.getElementById("wishText");
+      console.log("Updating Wish Element:", wishEl, "with", content.paragraph);
+      if (wishEl) wishEl.innerText = content.paragraph;
+    } else {
+      console.warn("No paragraph field in content (or null)");
+    }
+
+    // image_url -> #imagePath (src)
+    if (content.image_url) {
+      const imgEl = document.getElementById("imagePath");
+      console.log("Updating Image Element:", imgEl, "with", content.image_url);
+      if (imgEl) imgEl.setAttribute("src", content.image_url);
+    } else {
+      console.warn("No image_url field in content");
+    }
+
+  } catch (err) {
+    console.error("Error fetching data from API:", err);
+    // alert("Error fetching data: " + err.message);
+  }
 };
 
 // ===============================
 // Init (correct sequencing)
 // ===============================
-fetchData().then(animationTimeline);
+document.addEventListener("DOMContentLoaded", () => {
+  fetchData().then(() => {
+    animationTimeline();
+  });
+});
 
 // ===============================
 // Valentine Interaction Logic
@@ -661,25 +716,25 @@ resolveFetch().then(animationTimeline());
 const spawnHeartAtCursor = (e) => {
   const heart = document.createElement("div");
   heart.className = "heart";
-  
+
   // Position heart at exact cursor location
   heart.style.left = e.clientX + "px";
   heart.style.top = e.clientY + "px";
   heart.style.bottom = "auto";
-  
+
   // Use cursor-specific animation
   heart.style.animationName = "floatUpFromCursor";
-  
+
   // Random animation duration between 2-3 seconds for variety
   const duration = (Math.random() * 1 + 2).toFixed(2);
   heart.style.animationDuration = duration + "s";
-  
+
   // Random color variation for hearts
   const colors = ["#ff4d6d", "#ff6b9d", "#ff85c0", "#ffa3d2", "#ffc1e3"];
   heart.style.background = colors[Math.floor(Math.random() * colors.length)];
-  
+
   document.body.appendChild(heart);
-  
+
   // Remove heart element after animation completes
   setTimeout(() => {
     heart.remove();
