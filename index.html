@@ -253,9 +253,71 @@
       }
 
       musicControl.addEventListener("click", (e) => {
-        e.stopPropagation(); // Prevent document click from firing
-        toggleMusic();
+        // Only toggle if not dragging (simple check)
+        if (!isDragging) {
+          toggleMusic();
+        }
       });
+
+      // --- Draggable Logic ---
+      let isDragging = false;
+      let startX, startY, initialLeft, initialTop;
+
+      const startDrag = (e) => {
+        isDragging = false;
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        startX = clientX;
+        startY = clientY;
+
+        const rect = musicControl.getBoundingClientRect();
+        initialLeft = rect.left;
+        initialTop = rect.top;
+
+        // Remove transitions during drag for responsiveness
+        musicControl.style.transition = 'none';
+
+        document.addEventListener('mousemove', onDrag);
+        document.addEventListener('touchmove', onDrag, { passive: false });
+        document.addEventListener('mouseup', stopDrag);
+        document.addEventListener('touchend', stopDrag);
+      };
+
+      const onDrag = (e) => {
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        // Calculate distance moved
+        const dx = clientX - startX;
+        const dy = clientY - startY;
+
+        // Mark as dragging if moved significantly
+        if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+          isDragging = true;
+        }
+
+        // Apply new position (fixed)
+        musicControl.style.left = `${initialLeft + dx}px`;
+        musicControl.style.top = `${initialTop + dy}px`;
+        musicControl.style.right = 'auto'; // Clear right/bottom if set
+        musicControl.style.bottom = 'auto';
+
+        if (e.preventDefault) e.preventDefault(); // Prevent scrolling on touch
+      };
+
+      const stopDrag = () => {
+        // Restore transition
+        musicControl.style.transition = 'box-shadow 0.3s ease, background 0.3s ease, transform 0.1s';
+
+        document.removeEventListener('mousemove', onDrag);
+        document.removeEventListener('touchmove', onDrag);
+        document.removeEventListener('mouseup', stopDrag);
+        document.removeEventListener('touchend', stopDrag);
+      };
+
+      musicControl.addEventListener('mousedown', startDrag);
+      musicControl.addEventListener('touchstart', startDrag, { passive: false });
 
       // Play after FIRST user interaction (browser rule)
       document.addEventListener("click", () => {
