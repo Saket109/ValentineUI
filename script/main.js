@@ -181,12 +181,6 @@ const animationTimeline = () => {
       repeatDelay: 1.4,
     }, 0.3)
 
-    // Fade out the wish section
-    .to(".six", 0.7, {
-      opacity: 0,
-      pointerEvents: "none"
-    }, "+=1")
-
     .to(".nine", 0.1, { opacity: 1, pointerEvents: "auto" })
     .staggerFrom(".nine p", 1, ideaEnter, 1.2)
     .to(".valentine-box", 0.6, {
@@ -655,11 +649,6 @@ const animationTimeline = () => {
       },
       0.3
     )
-    .to(".six", 0.5, {
-      opacity: 0,
-      y: 30,
-      zIndex: "-1",
-    })
     .staggerFrom(".nine p", 1, ideaTextTrans, 1.2)
     .to(
       ".last-smile",

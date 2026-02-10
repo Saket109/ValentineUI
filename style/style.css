@@ -307,7 +307,7 @@ body {
 }
 
 .six img {
-  width: 30%;
+  width: 20%;
   height: 20%;
   max-width: 50%;
   max-height: 50vh;
@@ -439,6 +439,11 @@ body {
 .nine {
   opacity: 0;
   pointer-events: none;
+  /* Override container default top:20vh to avoid overlap with image */
+  top: auto !important;
+  bottom: 5vh;
+  z-index: 100;
+  /* Ensure it's above image */
 }
 
 #replay {
